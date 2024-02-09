@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/card33"
+        android:id="@+id/card16"
         android:layout_width="63dp"
         android:layout_height="87dp"
         android:onClick="onClick"
@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/card" />
 
     <ImageView
-        android:id="@+id/card23"
+        android:id="@+id/card12"
         android:layout_width="63dp"
         android:layout_height="87dp"
         android:onClick="onClick"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.06" />
 
     <ImageView
-        android:id="@+id/card00"
+        android:id="@+id/card1"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -61,7 +61,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card01"
+        android:id="@+id/card2"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -75,7 +75,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card02"
+        android:id="@+id/card3"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -89,7 +89,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card03"
+        android:id="@+id/card4"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -103,7 +103,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card10"
+        android:id="@+id/card5"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -117,7 +117,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card11"
+        android:id="@+id/card6"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -131,7 +131,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card12"
+        android:id="@+id/card7"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -145,7 +145,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card13"
+        android:id="@+id/card8"
         android:layout_width="68dp"
         android:layout_height="86dp"
         android:onClick="onClick"
@@ -159,7 +159,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/card20"
+        android:id="@+id/card9"
         android:layout_width="62dp"
         android:layout_height="92dp"
         android:onClick="onClick"
@@ -172,7 +172,7 @@
         app:srcCompat="@drawable/card" />
 
     <ImageView
-        android:id="@+id/card22"
+        android:id="@+id/card11"
         android:layout_width="63dp"
         android:layout_height="87dp"
         android:onClick="onClick"
@@ -185,7 +185,7 @@
         app:srcCompat="@drawable/card" />
 
     <ImageView
-        android:id="@+id/card32"
+        android:id="@+id/card15"
         android:layout_width="63dp"
         android:layout_height="87dp"
         android:onClick="onClick"
@@ -198,7 +198,7 @@
         app:srcCompat="@drawable/card" />
 
     <ImageView
-        android:id="@+id/card30"
+        android:id="@+id/card13"
         android:layout_width="63dp"
         android:layout_height="87dp"
         android:onClick="onClick"
@@ -211,7 +211,7 @@
         app:srcCompat="@drawable/card" />
 
     <ImageView
-        android:id="@+id/card21"
+        android:id="@+id/card10"
         android:layout_width="63dp"
         android:layout_height="87dp"
         android:onClick="onClick"
@@ -224,7 +224,7 @@
         app:srcCompat="@drawable/card" />
 
     <ImageView
-        android:id="@+id/card31"
+        android:id="@+id/card14"
         android:layout_width="63dp"
         android:layout_height="87dp"
         android:onClick="onClick"

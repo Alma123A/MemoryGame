@@ -1,6 +1,7 @@
 package com.example.memorygame;
 
 import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -32,43 +33,16 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseAuth auth;
-    GoogleSignInClient googleSignInClient;
-    ShapeableImageView imageView;
-    TextView name, mail;
-    private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            if (result.getResultCode() == RESULT_OK) {
-                Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                try {
-                    GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
-                    AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
-                    auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                auth = FirebaseAuth().getInstance();
-                                Glide.with(MainActivity.this).load(Objects.requireNonNull(auth.getCurrentUser()).getPhotoUrl()).into(imageView);
-                                name.setText(auth.getCurrentUser().getDisplayName());
-                                mail.setText(auth.getCurrentUser().getEmail());
-                                Toast.makeText(MainActivity.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(MainActivity.this, "Failed to sign in: " + task.getException(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    });
+
+ //   private final ActivityResultLauncher<Intent> activityResultLauncher =
+        //      registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+
+
     private ImageView arr[];
     private int arr2[];
     private int countP1 = 0;
     private int countP2 = 0;
-    private WindowDecorActionBar.TabImpl scoreTextView;
+ //   private WindowDecorActionBar.TabImpl scoreTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,11 +97,13 @@ public class MainActivity extends AppCompatActivity {
                 arr[i].setImageResource(arr2[i]);
             }
         }
-        public void knock (View view){
-            count++;
-            for (int i = 0; i < viewId.length; i++) {
-                if (viewId[i].arr[i].setImageResource(arr2[i]))
-            }
-        }
+
+    }
+
+    public void knock (View view){
+        //  count++;
+        //  for (int i = 0; i < viewId.length; i++) {
+        //      if (viewId[i].arr[i].setImageResource(arr2[i]))
+        //  }
     }
 }

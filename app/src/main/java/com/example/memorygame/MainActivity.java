@@ -1,109 +1,100 @@
 package com.example.memorygame;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.WindowDecorActionBar;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.imageview.ShapeableImageView;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.util.Objects;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
- //   private final ActivityResultLauncher<Intent> activityResultLauncher =
-        //      registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    int[] viewId = {
+            R.id.card1, R.id.card2, R.id.card3, R.id.card4,
+            R.id.card5, R.id.card6, R.id.card7, R.id.card8,
+            R.id.card9, R.id.card10, R.id.card11, R.id.card12,
+            R.id.card13, R.id.card14, R.id.card15, R.id.card16
+    };
 
+    private ImageView[] arr;
+    private int[] arr2;
 
-    private ImageView arr[];
-    private int arr2[];
-    private int countP1 = 0;
-    private int countP2 = 0;
- //   private WindowDecorActionBar.TabImpl scoreTextView;
+    int countP1 = 0;
+    int countP2 = 0;
+    int lastOpenedCard1 = -1;
+    int lastOpenedCard2 = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onNewGame();
-
-
     }
 
     public void onNewGame() {
         arr = new ImageView[16];
-        arr[0] = findViewById(R.id.card1);
-        arr[1] = findViewById(R.id.card2);
-        arr[2] = findViewById(R.id.card3);
-        arr[3] = findViewById(R.id.card4);
-        arr[4] = findViewById(R.id.card5);
-        arr[5] = findViewById(R.id.card6);
-        arr[6] = findViewById(R.id.card7);
-        arr[7] = findViewById(R.id.card8);
-        arr[8] = findViewById(R.id.card9);
-        arr[9] = findViewById(R.id.card10);
-        arr[10] = findViewById(R.id.card11);
-        arr[11] = findViewById(R.id.card12);
-        arr[12] = findViewById(R.id.card13);
-        arr[13] = findViewById(R.id.card14);
-        arr[14] = findViewById(R.id.card15);
-        arr[15] = findViewById(R.id.card16);
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = findViewById(viewId[i]);
+        }
 
         arr2 = new int[16];
-        arr2[0] = R.drawable.cap1;
-        arr2[1] = R.drawable.cap2;
-        arr2[2] = R.drawable.cap3;
-        arr2[3] = R.drawable.cap4;
-        arr2[4] = R.drawable.cap5;
-        arr2[5] = R.drawable.cap6;
-        arr2[6] = R.drawable.cap7;
-        arr2[7] = R.drawable.cap8;
-        arr2[8] = R.drawable.cap1;
-        arr2[9] = R.drawable.cap2;
-        arr2[10] = R.drawable.cap3;
-        arr2[11] = R.drawable.cap4;
-        arr2[12] = R.drawable.cap5;
-        arr2[13] = R.drawable.cap6;
-        arr2[14] = R.drawable.cap7;
-        arr2[15] = R.drawable.cap8;
+        for (int i = 0; i < 8; i++) {
+            arr2[i] = getResources().getIdentifier("cap" + (i + 1), "drawable", getPackageName());
+            arr2[i + 8] = arr2[i]; // Pairs of images
+        }
+
+        shuffleCards();
+    }
+
+    private void shuffleCards() {
+        Random rnd = new Random();
+        for (int i = arr2.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            int temp = arr2[index];
+            arr2[index] = arr2[i];
+            arr2[i] = temp;
+        }
+    }
+
+    public void Reset(View view) {
+        shuffleCards();
+        countP1 = 0;
+        // TextView counterTextView = findViewById(R.id.count1); // Remove this line
+        // counterTextView.setText("P1-" + countP1); // Remove this line
+        countP2 = 0;
+        // TextView counterTextView2 = findViewById(R.id.count2); // Remove this line
+        // counterTextView2.setText("P2-" + countP2); // Remove this line
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i].setImageResource(R.drawable.card);
+        }
+        lastOpenedCard1 = -1;
+        lastOpenedCard2 = -1;
+    }
+
+    public void flipCard() {
+        if (lastOpenedCard1 != -1) {
+            arr[lastOpenedCard1].setImageResource(R.drawable.card);
+            lastOpenedCard1 = -1;
+        }
+        if (lastOpenedCard2 != -1) {
+            arr[lastOpenedCard2].setImageResource(R.drawable.card);
+            lastOpenedCard2 = -1;
+        }
     }
 
     public void onClick(View view) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == view) {
                 arr[i].setImageResource(arr2[i]);
+                // Add logic to check if it's a match or not
+                // For example: checkMatch(i);
             }
         }
-
     }
 
-    public void knock (View view){
-        //  count++;
-        //  for (int i = 0; i < viewId.length; i++) {
-        //      if (viewId[i].arr[i].setImageResource(arr2[i]))
-        //  }
+    public void knock(View view) {
+        // Placeholder method for future functionality
     }
 }

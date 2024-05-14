@@ -95,7 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                 activityResultLauncher.launch(intent);
             }
         });
-
+    }}
+/*
         MaterialButton signOut = findViewById(R.id.signout);
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,3 +126,5 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
+
+ */

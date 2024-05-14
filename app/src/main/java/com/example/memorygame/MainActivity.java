@@ -94,7 +94,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void knock(View view) {
-        // Placeholder method for future functionality
-    }
+
 }

@@ -2,6 +2,7 @@ package com.example.memorygame;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,32 +41,54 @@ public class LoginActivity extends AppCompatActivity {
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
 
         public void onActivityResult(ActivityResult result) {
+
+            Log.e("xx","onActivityResult result = " + result);
+
             if (result.getResultCode() == RESULT_OK) {
+                Log.e("xx","onActivityResult OK");
+
                 Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
                 try {
+                    Log.e("xx","line 47");
+
                     GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
+
                     AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
-                    auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    Log.e("xx","line 50");
+
+                    auth.signInWithCredential(authCredential).addOnCompleteListener(
+                            new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.e("xx","onCompleted");
                             if (task.isSuccessful()) {
                                 auth = FirebaseAuth.getInstance();
-                                Glide.with(LoginActivity.this).load(Objects.requireNonNull(auth.getCurrentUser()).getPhotoUrl()).into(imageView);
-                                name.setText(auth.getCurrentUser().getDisplayName());
-                                mail.setText(auth.getCurrentUser().getEmail());
+                           //     Glide.with(LoginActivity.this).load(Objects.requireNonNull(auth.getCurrentUser()).getPhotoUrl()).into(imageView);
+                               Log.e("xx","auth.getCurrentUser = "+auth.getCurrentUser());
+                               // name.setText(auth.getCurrentUser().getDisplayName());
+                              //  mail.setText(auth.getCurrentUser().getEmail());
                                 Toast.makeText(LoginActivity.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
+                              //  intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
 
                                 startActivity(intent);
                             } else {
+                                Log.e("xx","onCompleted - fail");
+
                                 Toast.makeText(LoginActivity.this, "Failed to sign in: " + task.getException(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
+                    Log.e("xx","line 75");
+
+
                 } catch (ApiException e) {
                     e.printStackTrace();
                 }
+            }
+         else {
+                Log.e("xx","onActivityResult failed");
+
             }
         }
     });
@@ -91,8 +114,5 @@ public class LoginActivity extends AppCompatActivity {
                 activityResultLauncher.launch(intent) ;
             }
         });
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("USERNAME", auth.getCurrentUser().getDisplayName());
-        startActivity(intent);
     }
 }

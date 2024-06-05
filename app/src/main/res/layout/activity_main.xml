@@ -265,6 +265,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/WelcomeMsg"
         android:layout_width="6dp"
         android:layout_height="3dp"
         android:text=""
